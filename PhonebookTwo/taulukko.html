@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Puhelinluettelo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  </head>
+  <body>
+    <h1>Puhelinluettelo</h1>
+
+    <!--Taulukko, johon puhelinnumerot lisätään-->
+    <table id="phoneTable">
+      <tr>
+        <th>Nimi</th>
+        <th>Puhelinnumero</th>
+      </tr>
+    </table>
+
+    <!--Linkki, josta pääsee takaisin pääsivulle-->
+    <a href="index.html">Takaisin pääsivulle</a>
+
+    <script>
+      $(document).ready(function () {
+        $.getJSON(
+          "http://a41d.k.time4vps.cloud:3001/henkilot",
+          function (data) {
+            //Henkilölistan läpikäynti sekä tietojen lisääminen taulukkoon
+            $.each(data, function (key, person) {
+              $("#phoneTable").append(
+                "<tr><td>" +
+                  person.name +
+                  "</td><td>" +
+                  person.phone +
+                  "</td></tr>"
+              );
+            });
+          }
+        );
+      });
+    </script>
+  </body>
+</html>

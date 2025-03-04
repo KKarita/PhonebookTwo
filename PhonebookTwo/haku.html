@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Haku - Puhelinluettelo</title>
+    <link rel="stylesheet" href="styles.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  </head>
+  <body>
+    <h1>Hae puhelinnumeroa</h1>
+
+    <!--Lomake, missä käyttäjä voi syöttää nimen ja puhelinnumeron-->
+    <form id="form">
+      <label for="nimi">Syötä nimi:</label>
+      <input name="nimi" id="nimi" type="text" maxlength="35" size="35" />
+      <input name="submit" type="button" value="Hae puhelinnumeroa" />
+      <p id="result"></p>
+    </form>
+
+    <!--Linkki, josta pääsee takaisin pääsivulle-->
+    <a href="index.html">Takaisin pääsivulle</a>
+
+    <script>
+      $(document).ready(function () {
+        $('[name="submit"]').click(function () {
+          let name = $("#nimi").val(); //Haetaan käyttäjän syöttämä nimi
+          if (name === "") {
+            //Tarkistetaan onko syöte tyhjä
+            $("result").text("Virheellinen syöte!");
+            return;
+          }
+
+          //Lista henkilöistä
+          $.getJSON(
+            "http://a41d.k.time4vps.cloud:3001/henkilot",
+            function (data) {
+              //Etsitään nimeä
+              let found = data.find(
+                (person) => person.name.toLowercase() === name.toLowercase()
+              );
+              //Jos nimi löytyy, näytetään puhelinnumero.
+              if (found) {
+                $("#result").text("Puhelinnumero: " + found.phone);
+              } else {
+                $("#result").text("Numeroa ei löytynyt.");
+              }
+            }
+          );
+        });
+      });
+    </script>
+  </body>
+</html>

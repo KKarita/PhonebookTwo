@@ -1,0 +1,35 @@
+body {
+  font-family: Georgia, "Times New Roman", Times, serif;
+  margin: 20px;
+  padding: 20px;
+}
+
+/* Otsikon tyyli*/
+h1 {
+  color: #333;
+}
+
+/* Taulukon tyyli*/
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+/* Taulukon solut*/
+th,
+td {
+  border: 1px solid black;
+  padding: 8px;
+  text-align: left;
+}
+
+/* Taulukon otsikkorivi*/
+th {
+  background-color: #f2f2f2;
+}
+
+/* Lomakkeen tyyli*/
+form {
+  margin-top: 20px;
+}
